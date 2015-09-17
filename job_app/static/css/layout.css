@@ -1,0 +1,41 @@
+div.page {
+  width: 680px;
+  margin: auto;
+  position: relative;
+}
+div.content {
+  position: relative;
+  clear: both;
+  padding: 30px 0px;
+}
+table {
+  width: 600px;
+  margin: auto;
+}
+table thead {
+  text-align: center;
+}
+table .left-column {
+  text-align: right;
+  width: 170px;
+}
+table td {
+  padding: 7px;
+  padding-left: 0px;
+  vertical-align: baseline;
+}
+.cover-letter td {
+  padding: 10px 15px 10px 15px;
+}
+.submit {
+  display: table;
+  margin: auto;
+}
+.email {
+  margin: auto;
+  width: 560px;
+  padding: 20px;
+}
+.email input[type=text] {
+  width: 200px;
+}

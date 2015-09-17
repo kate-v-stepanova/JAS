@@ -1,0 +1,28 @@
+<table class="cv-table">
+  <thead>
+    <tr><td colspan="2">Education</td></tr>
+  </thead>
+  <tbody>
+  {% for ed in education %}
+    <tr>
+      <td class="left-column">Dates:</td>
+      <td class="right-column" contenteditable="true">{{ ed.dates }}</td>
+    </tr>
+    <tr>
+      <td class="left-column">Degree:</td>
+      <td class="right-column"  contenteditable="true">{{ ed.degree }}</td>
+    </tr>
+    <tr>
+      <td class="left-column">Area of Studies:</td>
+      <td class="right-column" contenteditable="true">{{ ed.area_of_studies }}</td>
+    </tr>
+    <tr>
+      <td class="left-column">Educational Institute:</td>
+      <td class="right-column" contenteditable="true">{{ ed.educational_institue }}</td>
+    </tr>
+  {% if not forloop.last %}
+    <tr class="separator"></tr>
+  {% endif %}
+  {% endfor %}
+  </tbody>
+</table>

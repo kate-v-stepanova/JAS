@@ -1,0 +1,103 @@
+{% block 'extra_style' %}
+    <style type="text/css">
+      @page {
+        size: a4 portrait;
+      @font-face {
+        font-family: Consolas;
+
+        src: url('/static/fonts/Monospace.ttf');
+    }
+        @frame content_frame {
+            left: 50pt;
+            right: 50pt;
+            top: 50pt;
+            height: 692pt;
+
+        }
+    }
+    body {
+      font-family: Consolas;
+      font-weight: normal;
+      font-size: 9pt;
+      color: black;
+
+    }
+
+    table.cover-letter {
+      font-weight: bold;
+      background: #efefef;
+        padding: 5px;
+    }
+
+    th.table-header {
+        font-weight: bold;
+        font-size: 14pt;
+        background: #6fa8dc;
+      padding-bottom: 0px;
+      padding-top: 7px;
+    }
+
+  div.contact-info {
+      font-size: 9pt;
+    text-align: right;
+    background: #efefef;
+    width: 580px;
+    margin: auto;
+    padding: 10px;
+      color: black;
+  }
+
+    </style>
+{% endblock %}
+
+<div class="contact-info">
+  Ekaterina Stepanova,<br>
+  phone: +49 176 975 96699<br>
+  email: <a href="mailto:kate.v.stepanova@gmail.com">kate.v.stepanova@gmail.com</a><br>
+  Heidelberg, {% now "d.m.Y" %}
+</div>
+<table class="cover-letter">
+  <thead><tr><th class="table-header">Motivation Letter</td></tr></thead>
+  <tbody>
+    <tr><td>&nbsp;Dear {{ hr_name|default:'Ms. Esti' }},<br>
+      with this motivation letter I would like to underline my interest at working for the company
+     {{ company|default:'Colombian Bananas' }}.</td>
+    </td></tr>
+    <tr><td> &nbsp;My total professional experience is 4 years, plus academical experience while
+obtaining my degree in Information Technology. During my studies I worked for a French company
+VDOM Box Research. After half a year, I got a promotion from Student to Junior Developer, and one year later
+I was working as a Python Developer and Manager of Technical Writers Team. During this time I learnt about GUI, Web,
+Multi-Platform and Server Development. One of the projects developed in the company I presented as my Thesis. </td></tr>
+
+<tr><td> &nbsp;After graduation, I did an internship in the company NEC (Heidelberg, Germany), where I worked in the project
+  Smart Grid on an algorithm for Distributing solar Engergy in  multi-user Electric Systems.
+  This work was completed 3 month earlier than planned, and I got involved in another project -
+  development of Web Application for maintaining Energy Comissioning and Resource Consumption.</td></tr>
+
+    <tr><td> &nbsp;The last year I've been working part-time as a Python Developer for the company CueSoft
+(Freiburg, Germany), where I have been responsible for the development of Web Applications (both server-side and client-side).
+In parallel I worked as a Hardware/Software Specialist for the company ITS-Pfeiffer, consulting customers and implementing
+Hardware/Software solutions for different types of Servers. Apart from that, I invested time in my personal development -
+studying Psychology as my second Bachelor, learning German, and doing my own small projects.</td></tr>
+
+<tr><td>&nbsp;As for my personal skills, I'm easily adapting in a new environment and able to apply my knowledge in
+different areas. I have strong analytical skills and can efficiently work on few tasks at the same time. I'm motivated
+to learn and grow both professionally and personally.
+</td></tr>
+
+    <tr><td>&nbsp;Currently I'm looking for a full-time job
+    as a Software Developer in the area of Medicine, Environment or Smart Systems.
+    The job position <b>{{job_position|default:'Banana Tester'}}</b> presented on the website:
+<a href="{{ company_url|default:'bananas.com'}}">​{{ company_url|default:'bananas.com'}}</a>
+      looks very attractive to me. As required, I have experience with Python, Linux, Java,
+        Git, in team work with technology Scrum and good communication skills. I believe,
+  that my knowledge and skills would perfectly for this job position.</td></tr>
+
+  <tr><td>&nbsp;I would welcome the opportunity to take part in an interview to
+introduce myself and learn more about the project.</td></tr>
+    <tr><td>&nbsp;Thank you for you interest. I'm looking forward to receiving an answer from you.</td></tr>
+
+  <tr><td>&nbsp;Sincerely yours,<br>
+Ekaterina Stepanova</td></tr>
+  </tbody>
+</table>

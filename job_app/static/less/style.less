@@ -1,0 +1,80 @@
+@import 'colors.less';
+
+body {
+	font-family: Monospace;
+	font-size: 9pt;
+    background: grey;
+    div.page {
+        background: white;
+    }
+}
+
+table.cover_letter {
+	font-weight: bold;
+	border-spacing: 0px;
+    thead {
+        background: @blue;
+        font-size: 14pt;
+        font-weight: bold;
+    }
+    tbody {
+        background: @lightgrey;
+        .right-column {
+            font-weight: normal;
+        }
+        .separator {
+            background: @lightblue;
+        }
+    }
+    font-weight: normal;
+    td {
+        color: grey;
+    }
+}
+
+
+[contenteditable=true] {
+    font-weight: bold;
+    color: black;
+}
+
+.email {
+    color: grey;
+    border-radius: 10px;
+    border: 3px solid @blue;
+    background: @lightgrey;
+}
+
+.submit {
+    background: @blue;
+    padding: 5px;
+    border-radius: 5px;
+    &:hover {
+        cursor: pointer;
+        border: 1px solid lightgrey;
+        background: @blue-button;
+    }
+    color: white;
+    border: 1px solid @lightblue;
+}
+
+input[type=submit] {
+    .submit;
+}
+
+.error {
+    color: red;
+}
+
+table.job_app {
+    border-collapse: collapse;
+    th, tr, td {
+        border: 1px solid grey;
+    }
+    td {
+        padding: 5px;
+    }
+    .row-odd {
+        background-color: @lightblue;
+    }
+}
