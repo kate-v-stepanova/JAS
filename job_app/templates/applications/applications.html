@@ -8,13 +8,19 @@
     <input type="submit" name='add_record' class="submit" value="Add record" url="{{ request.path }}">
   </p>
 
-  <table class="job_app">
+  <table class="table table-stripped table-hover">
     <thead>
-      <tr><td/><td>Company</td><td>Location</td><td>Job Position</td><td>Status</td></tr>
+      <tr>
+        <th></th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Job Position</th>
+        <th>Status</th>
+      </tr>
     </thead>
     <tbody>
     {% for app in app_list %}
-      <tr class="{% cycle 'row-odd' 'row-even' %}">
+      <tr>
         <td><input type="checkbox" name="app_id" value="{{ app.id }}"></td>
         <td><a href="{{ app.website }}">{{ app.company }}</a></td>
         <td>{{ app.location }}</td>
