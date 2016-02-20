@@ -1,12 +1,11 @@
 {% url 'home' as home %}
 {% url 'applications' as applications %}
-
 <nav class="navbar navbar-default" id="jas-navigation">
   <ul class="nav navbar-nav">
     <li {% if request.path = home %} class="active"{% endif %}>
       <a href="{% url 'home' %}">Home</a>
     </li>
-    <li {% if request.path = home %} class="active"{% endif %}>
+    <li {% if request.path = applications %} class="active"{% endif %}>
       <a href="{% url 'applications' %}">Applications <span class="sr-only">(current)</span></a>
     </li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
