@@ -154,17 +154,11 @@ def __save_record(request):
         if not application.date:
             application.date = datetime.date.today()
         application.save()
-
-        print application.company
         app_list = JobApplication.objects.filter(user=user)
         return render(request, 'applications/applications.html', {'app_list': app_list})
     else:
-        print "not valid"
         return render(request, 'applications/new_record.html', {'form': form})
-    # application.company = request.POST.get('company')
-    # application.website = request.POST.get('website')
 
-    return render(request, 'applications/new_record.html', request.POST)
 
 
 def applications(request):
@@ -176,8 +170,11 @@ def applications(request):
             return __save_record(request)
     else:
         user = request.user
-        apps = JobApplication.objects.filter(user=user)
-        return render(request, 'applications/applications.html', {'app_list': apps})
+        if user.is_authenticated():
+            apps = JobApplication.objects.filter(user=user)
+            return render(request, 'applications/applications.html', {'app_list': apps})
+        else:
+            return HttpResponseRedirect('/login/')
     return render(request, 'applications/applications.html')
 
 
