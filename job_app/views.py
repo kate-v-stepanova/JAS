@@ -70,9 +70,11 @@ def __email(request):
              from_email='kate.v.stepanova@gmail.com', to=to)
     email.content_subtype = "html"
 
-
-
     cv = CV.objects.first()
+    if cv is None:
+        return render(request, 'home.html', {'notification': 'No CV to attach. Please add a CV on the profile page'})
+        # return HttpResponseRedirect('/', {'notification':'No CV to attach. Please add a CV on the profile page'})
+
     email.attach('EkaterinaStepanova.CV.pdf', cv.file.read(), 'application/pdf')
 
     if 'vdom' in request.POST:

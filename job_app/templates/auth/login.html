@@ -11,12 +11,12 @@
     <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
     <label for="password" class="sr-only">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    {% if request.path = register %}
+    {% if request.path == register %}
       <input type="password" id="confirm_password" name="confirm_password" class="form-control"
              placeholder="Confirm password" required>
       <button class="btn btn-sm btn-primary" type="submit">Register</button>
       <a href="{{ login }}" class="text-center new-account">Back to login</a>
-    {% elif request.path = login %}
+    {% elif request.path == login %}
       <button class="btn btn-sm btn-primary" type="submit">Log in</button>
       <a href="{{ register }}" class="text-center new-account">Register</a>
     {% endif %}

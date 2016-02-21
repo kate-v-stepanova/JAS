@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 
 from django.contrib import admin
 
@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'job_app.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -22,9 +22,9 @@ urlpatterns = patterns('',
     # custom
     url(r'^$', home, name="home"),
     url(r'^applications/$', applications, name='applications'),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
     # pdf
-urlpatterns += patterns("",
+urlpatterns += [
     url(r"^cover_letter_pdf$", cover_letter_pdf, name='cover_letter_pdf'),
-)
+]

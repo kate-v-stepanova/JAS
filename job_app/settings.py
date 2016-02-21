@@ -99,13 +99,19 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'job_app/static')
 
-# TEMPLATE_DIR = os.path.join(BASE_DIR, 'job_app/templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'job_app/templates')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'job_app/templates'),
     os.path.join(BASE_DIR, 'job_app/templates', 'CV'),
     os.path.join(BASE_DIR, 'job_app/templates', 'auth'),
 )
+
+# TEMPLATES = (
+#     os.path.join(BASE_DIR, 'job_app/templates'),
+#     os.path.join(BASE_DIR, 'job_app/templates', 'CV'),
+#     os.path.join(BASE_DIR, 'job_app/templates', 'auth'),
+# )
 
 DEGREE_OPTIONS = (
     ("Bachelor", "Bachelor"),
