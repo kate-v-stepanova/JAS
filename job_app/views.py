@@ -63,8 +63,6 @@ def __email(request):
     template = 'cover_letter_pdf.html'
     cover_letter = render_to_pdf(template, context)
 
-    print request.POST
-
     email = EmailMessage(subject=arguments.get('job_position'), body=message,
              bcc=['kate.v.stepanova@gmail.com'],
              from_email='kate.v.stepanova@gmail.com', to=to)
@@ -73,15 +71,22 @@ def __email(request):
     cv = CV.objects.first()
     if cv is None:
         return render(request, 'home.html', {'notification': 'No CV to attach. Please add a CV on the profile page'})
-        # return HttpResponseRedirect('/', {'notification':'No CV to attach. Please add a CV on the profile page'})
 
     email.attach('EkaterinaStepanova.CV.pdf', cv.file.read(), 'application/pdf')
 
     if 'vdom' in request.POST:
         vdom = Reference.objects.filter(name='vdom').first()
+        if vdom is None:
+            return render(request, 'home.html', {'notification': 'No VDOM reference to attach. '
+                                                                 'Please add VDOM on the profile page'})
+
         email.attach('EkaterinaStepanova.Reference.VDOM.pdf', vdom.file.read(), 'application/pdf')
     if 'nec' in request.POST:
         nec = Reference.objects.filter(name='nec').first()
+        if nec is None:
+            return render(request, 'home.html', {'notification': 'No a reference reference to attach. '
+                                                                 'Please add a reference on the profile page'})
+
         email.attach('EkaterinaStepanova.Reference.NEC.pdf', nec.file.read(), 'application/pdf')
 
     email.attach('EkaterinaStepanova.MotivationLetter.pdf', cover_letter, 'application/pdf')
@@ -162,10 +167,8 @@ def __save_record(request):
         return render(request, 'applications/new_record.html', {'form': form})
 
 
-
 def applications(request):
     if request.method == 'POST':
-        print request.POST
         if "add_record" in request.POST:
             return render(request, 'applications/new_record.html', {'form': ApplicationForm()})
         if "save_record" in request.POST: # create new or change existing one
@@ -178,11 +181,3 @@ def applications(request):
         else:
             return HttpResponseRedirect('/login/')
     return render(request, 'applications/applications.html')
-
-
-def send_application(request):
-    print request
-    if request.method == 'POST':
-        print request.POST
-    return render(request, "home.html")
-
