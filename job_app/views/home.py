@@ -1,58 +1,9 @@
-from __future__ import unicode_literals
-from easy_pdf.rendering import render_to_pdf, render_to_pdf_response
-import os
-import datetime
-
-from django.http import HttpResponse
-from django.http.response import HttpResponseRedirect
-from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate, models
 from django.shortcuts import render
-from django.core.mail import send_mail, EmailMessage
+from django.http.response import HttpResponseRedirect
 from django.template import Template, Context
-from django.template.loader import render_to_string
+from django.core.mail import send_mail, EmailMessage
 
-from models import CV, Reference, JobApplication
-from forms import ApplicationForm
-
-
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is None:
-            return render(request, 'login.html', {'notification': 'Incorrect login or password'})
-        else:
-            auth_login(request, user)
-            return HttpResponseRedirect('/')
-    return render(request, 'login.html')
-
-
-# register
-def register(request):
-    if request.user.is_authenticated():
-        auth_logout(request)
-    if request.method == 'POST':
-        username = request.POST.get('username', '')
-        user = models.User.objects.filter(username=username)
-        if user:
-            return render(request, 'auth/login.html', {'notification': 'User already exists'})
-        email = request.POST.get('email', '')
-        password = request.POST.get('password', '')
-        confirm_password = request.POST.get('confirm_password', '')
-        if password and password == confirm_password:
-            user = models.User.objects.create_user(username, email, password)
-            user.save()
-            return login(request)
-            # TODO: email confirm
-            # return HttpResponseRedirect('/')
-    return render(request, 'login.html')
-
-
-def logout(request):
-    auth_logout(request)
-    return HttpResponseRedirect('/') # TODO: redirect back
-
+from job_app.models import CV, Reference, JobApplication
 
 def __email(request):
     arguments = request.session['job_app_args']
@@ -150,34 +101,3 @@ def home(request):
     else:
         return HttpResponseRedirect('/login/')
 
-
-def __save_record(request):
-    # create a new one
-    form = ApplicationForm(request.POST)
-    if form.is_valid():
-        user = request.user
-        application = form.save(commit=False)
-        application.user = user
-        if not application.date:
-            application.date = datetime.date.today()
-        application.save()
-        app_list = JobApplication.objects.filter(user=user)
-        return render(request, 'applications/applications.html', {'app_list': app_list})
-    else:
-        return render(request, 'applications/new_record.html', {'form': form})
-
-
-def applications(request):
-    if request.method == 'POST':
-        if "add_record" in request.POST:
-            return render(request, 'applications/new_record.html', {'form': ApplicationForm()})
-        if "save_record" in request.POST: # create new or change existing one
-            return __save_record(request)
-    else:
-        user = request.user
-        if user.is_authenticated():
-            apps = JobApplication.objects.filter(user=user)
-            return render(request, 'applications/applications.html', {'app_list': apps})
-        else:
-            return HttpResponseRedirect('/login/')
-    return render(request, 'applications/applications.html')
